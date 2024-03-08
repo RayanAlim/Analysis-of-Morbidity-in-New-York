@@ -1,0 +1,27 @@
+---
+title: "negative_bin_model.Rmd"
+format: html
+---
+
+```{r}
+# load libraries
+library(MASS)
+library(dplyr)
+
+# load files 
+file_path <- "../scripts/death_count_by_Cause.csv"
+death_count_by_cause <- read.csv(file_path)
+
+death_count_by_cause$Leading.Cause <- as.factor(death_count_by_cause$Leading.Cause)
+
+# Attempt to increase the iteration limit to allow convergence
+nb_model <- glm.nb(Total_Deaths ~ Leading.Cause, 
+                   data = death_count_by_cause, 
+                   control = glm.control(maxit = 1000)) # Increase max iterations to 1000
+
+# Check the summary
+summary(nb_model)
+
+
+```
+
