@@ -23,6 +23,7 @@ library(palmerpenguins)
 ```
 
 
+
 # Introduction
 
 You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
@@ -95,6 +96,7 @@ We can use maths by including latex between dollar signs, for instance $\theta$.
 
 Our results are summarized in @tbl-modelresults.
 
+
 ```{r}
 #| echo: false
 #| eval: true
@@ -122,6 +124,7 @@ modelsummary::modelsummary(
   fmt = 2
 )
 ```
+
 
 
 
@@ -157,6 +160,7 @@ In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check. 
 
 In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior. This shows... 
 
+
 ```{r}
 #| eval: true
 #| echo: false
@@ -178,11 +182,13 @@ posterior_vs_prior(first_model) +
   coord_flip()
 ```
 
+
 ## Diagnostics
 
 @fig-stanareyouokay-1 is a trace plot. It shows... This suggests...
 
 @fig-stanareyouokay-2 is a Rhat plot. It shows... This suggests...
+
 
 ```{r}
 #| echo: false
@@ -201,9 +207,11 @@ plot(first_model, "rhat")
 
 
 
+
 \newpage
 
 
 # References
+
 
 
