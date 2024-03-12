@@ -24,7 +24,7 @@ death_count_by_cause <- nyc_data %>%
   summarise(Total_Deaths = sum(as.numeric(Deaths), na.rm = TRUE)) %>%
   arrange(desc(Total_Deaths))
 knitr::kable(death_count_by_cause, caption = "Count of Deaths by Leading Cause")
-write.csv(death_count_by_cause, "death_count_by_cause.csv", row.names = FALSE)
+
 ```
 
 ```{r}
