@@ -9,6 +9,7 @@ library(dplyr)
 library(knitr)
 library(ggplot2)
 library(forcats)
+library(testthat)
 
 # read in the dataset
 
@@ -58,3 +59,40 @@ print(gg)
 ggsave("top_causes_by_race.png", plot = gg, width = 12, height = 8)
 
 ```
+
+```{r}
+# Tests
+
+# Data set has been loaded correctly
+test_that("Dataset has been loaded", {
+  expect_true(exists("nyc_data"))
+  expect_is(nyc_data, "data.frame")
+})
+
+# 'death_count_by_cause' has the correct columns
+test_that("'death_count_by_cause' has correct columns", {
+  expected_cols <- c("Leading.Cause", "Total_Deaths")
+  expect_equal(colnames(death_count_by_cause), expected_cols)
+})
+
+# 'death_count_by_cause' table has correct number of rows
+test_that("'death_count_by_cause' has correct number of rows", {
+  expect_true(nrow(death_count_by_cause) > 0)
+})
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
