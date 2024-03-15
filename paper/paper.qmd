@@ -70,6 +70,22 @@ This suppression safeguards against the identification of individuals in rare ca
 
 # Model
 
+In our research, we investigated the causes of mortality within New York City’s diverse racial and ethnic populations for the year 2014. We hypothesize that the total number of deaths by leading cause follows a negative binomial regression. 
+Formally, the model is expressed as:
+$y_i | n_i \sim \text{NegBin}(\mu_i, k)$
+
+In the expression above, $y_i$, signifies the count of deaths for cause i,$\mu_i$ is the expected count, and $k$ is the dispersion parameter, which captures over-dispersion. 
+Our model also utilizes a log-link function, modeling the expected log-count as:
+$\log(\mu_i) = \beta_0 + \beta_1 \times \text{Cause}_i$
+
+Where $\beta_0$ is the intercept, and $\beta_1$ represents the vector of coefficients for the leading causes of death. 
+The leading causes are treated as categorical predictors, which results in the need to use dummy coding with one reference category. 
+
+For our Bayesian regression framework, we employ the stan_glm() function from the rstanarm package, which assumes default normal priors for the regression coefficients as follows:
+$\beta_0$ ~ Normal(0,2.5)
+$\beta_1$ ~ Normal(0,2.5)
+
+
 ### Model justification
 
 # Results
@@ -236,7 +252,8 @@ This shows...
 
 -   Has the dataset been used for any tasks already? If so, please provide a description.
     -   Yes, the dataset has been used for annual health reports and studies on mortality trends within New York City.
--   Is there a repository that links to any or all papers or systems that use the dataset? If so, please provide a link or other access point. - No.
+-    Is there a repository that links to any or all papers or systems that use the dataset? If so, please provide a link or other access point.
+    -   No.
 -   What (other) tasks could the dataset be used for?
     -   The dataset could be used to predict future trends in public health.
 -   Is there anything about the composition of the dataset or the way it was collected and preprocessed/cleaned/labeled that might impact future uses? For example, is there anything that a dataset consumer might need to know to avoid uses that could result in unfair treatment of individuals or groups (for example, stereotyping, quality of service issues) or other risks or harms (for example, legal risks, financial harms)? If so, please provide a description. Is there anything a dataset consumer could do to mitigate these risks or harms?
@@ -272,7 +289,7 @@ This shows...
 -   Any other comments?
     -   No
 
-# Diagnostics
+## Diagnostics
 
 @fig-stanareyouokay-1 is a trace plot.
 It shows...
