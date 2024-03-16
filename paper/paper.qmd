@@ -17,13 +17,20 @@ editor:
     wrap: sentence
 ---
 
-```{r}
+```{r, echo=FALSE, message=FALSE}
 #| include: false
 #| warning: false
 #| message: false
 
+# Load libraries
 library(tidyverse)
-library(palmerpenguins)
+library(dplyr)
+library(knitr)
+library(ggplot2)
+library(forcats)
+library(testthat)
+library(kableExtra)
+
 ```
 
 # Introduction
@@ -34,35 +41,50 @@ We use @citeR and @rohan.
 The remainder of this paper is structured as follows.
 @sec-data....
 
-# Data {#sec-data}
+# Data
 
-DATA This analysis utilizes data from the New York City Department of Health and Mental Hygiene, specifically provided by the Bureau of Vital Statistics {@NYCData}.
+This analysis utilizes data from the New York City Department of Health and Mental Hygiene, specifically provided by the Bureau of Vital Statistics {@NYCData}.
 The dataset encompasses records of deaths in New York City since 2007, detailing the leading causes of death categorized by sex and ethnicity.
 Each entry in this dataset is derived from NYC death certificates which are the official documentation of every death occurring within the city's jurisdiction.
 
-Dataset Context and Broader Implications The investigation into the leading causes of death within New York City holds significant public health importance.
+## Dataset Context and Broader Implications 
+
+The investigation into the leading causes of death within New York City holds significant public health importance.
 It allows for a nuanced understanding of mortality trends, guiding health policy, and intervention strategies tailored to specific demographics and causes.
 By examining mortality across different sexes and ethnic groups, this analysis contributes to identifying health disparities and targeting efforts to address them.
 
-Variables and Data Examination The dataset comprises several key variables, including: Year: The year of the recorded death.
-Leading Cause: The primary cause of death as categorized by ICD-10 codes.
-Sex: The sex of the deceased (Male, Female, or Gender Non-Conforming).
-Race Ethnicity: The self-reported ethnicity of the deceased, including categories such as Hispanic, White Non-Hispanic, Black Non-Hispanic, Asian and Pacific Islander, and Others.
-Deaths: The total number of deaths attributed to the leading cause.
-Death Rate and Age-Adjusted Death Rate: Rates per 100,000 population, providing standardized comparisons across different population sizes and age structures.
+## Variables and Data Examination 
+The dataset comprises several key variables, including: 
+- Year: The year of the recorded death.
 
-Alternative Datasets and Justification While other mortality databases exist, such as the CDC's National Center for Health Statistics, the chosen dataset offers a detailed and localized perspective specific to New York City.
+- Leading Cause: The primary cause of death as categorized by ICD-10 codes.
+
+- Sex: The sex of the deceased (Male, Female, or Gender Non-Conforming).
+
+- Race Ethnicity: The self-reported ethnicity of the deceased, including categories such as Hispanic, White, Non-Hispanic, Black Non-Hispanic, Asian and Pacific Islander, and others.
+
+- Deaths: The total number of deaths attributed to the leading cause.
+
+- Death Rate and Age-Adjusted Death Rate: Rates per 100,000 population, providing standardized comparisons across different population sizes and age structures.
+
+## Alternative Datasets and Justification 
+While other mortality databases exist, such as the CDC's National Center for Health Statistics, the chosen dataset offers a detailed and localized perspective specific to New York City.
 This specificity provides a more precise tool for understanding and addressing urban health dynamics, making it more relevant for city-specific policy-making and health intervention strategies.
 
-Data Cleaning and Variable Construction Preliminary data cleaning focused on addressing missing values, ensuring consistency in categorical variables, and suppressing unreliable rates as mentioned.
+## Data Cleaning and Variable Construction
+
+Preliminary data cleaning focused on addressing missing values, ensuring consistency in categorical variables, and suppressing unreliable rates as mentioned.
 New variables, such as aggregated categories for cause of death or demographic groupings, were constructed to facilitate analysis.
 For instance, causes of death were grouped into broader categories (e.g., cardiovascular diseases, cancers) to examine trends at a macro level.
 
-Summary Statistics and Relationships Initial exploratory data analysis revealed key trends and disparities in mortality rates across different populations within New York City.
+## Summary Statistics and Relationships 
+Initial exploratory data analysis revealed key trends and disparities in mortality rates across different populations within New York City.
 We provide summary statistics, including mean death rates and distributions of deaths by cause ethnicity, to provide insights into the health landscape of the city.
 For example, preliminary findings indicate significant differences in heart disease mortality between ethnic groups, warranting further investigation.
 
-Measurement and Methodological Notes The measurement of mortality and its causes relies on the accurate classification of death certificates, adhering to ICD-10 standards.
+## Measurement and Methodology Notes
+
+The measurement of mortality and its causes relies on the accurate classification of death certificates, adhering to ICD-10 standards.
 This classification ensures comparability with other datasets and robustness in identifying health trends.
 However, it's important to acknowledge potential limitations in cause-of-death reporting and classification, which may impact the analysis.
 To ensure privacy and reliability, rates based on small numbers (Relative Standard Error, RSE, \> 30) and aggregate counts less than 5 have been suppressed.
@@ -72,10 +94,12 @@ This suppression safeguards against the identification of individuals in rare ca
 
 In our research, we investigated the causes of mortality within New York City’s diverse racial and ethnic populations for the year 2014. We hypothesize that the total number of deaths by leading cause follows a negative binomial regression. 
 Formally, the model is expressed as:
+
 $y_i | n_i \sim \text{NegBin}(\mu_i, k)$
 
 In the expression above, $y_i$, signifies the count of deaths for cause i,$\mu_i$ is the expected count, and $k$ is the dispersion parameter, which captures over-dispersion. 
 Our model also utilizes a log-link function, modeling the expected log-count as:
+
 $\log(\mu_i) = \beta_0 + \beta_1 \times \text{Cause}_i$
 
 Where $\beta_0$ is the intercept, and $\beta_1$ represents the vector of coefficients for the leading causes of death. 
@@ -87,8 +111,62 @@ $\beta_1$ ~ Normal(0,2.5)
 
 
 ### Model justification
+The negative binomial regression was used due to its ability to account for the over-dispersion present in the data. This is a common occurrence with mortality counts due to the heterogeneity of death causes. Through the use of the  parameter, we can model the variance separately from the mean which provides a more flexible and accurate representation of the data. This model also accommodates the count nature of the dependent variable. 
+Furthermore, the model’s priors are informed by the normative distributions typically used in Bayesian regression analysis. This enables a degree of regularization that reduces the potential for overfitting. 
+
 
 # Results
+
+```{r, echo=FALSE, message=FALSE}
+file_path <- "../data/analysis_data/clean_nyc_data.csv"
+nyc_data <- read.csv(file_path)
+
+# create table showing count of deaths by cause (overall)
+death_count_by_cause <- nyc_data %>%
+  group_by(Leading.Cause) %>%
+  summarise(Total_Deaths = sum(as.numeric(Deaths), na.rm = TRUE)) %>%
+  arrange(desc(Total_Deaths)) %>%
+  slice_head(n = 10) %>%
+  mutate(Row = row_number()) %>%
+  select(Row, everything())
+
+colnames(death_count_by_cause) <-
+  c("No.", "Cause of Death", "Total Death Count")
+
+knitr::kable(death_count_by_cause, caption = "Count of Deaths by Leading Cause") %>%
+  kable_styling(bootstrap_options = c("striped", "hover"),
+                full_width = F) %>%
+  column_spec(1, bold = TRUE) %>%
+  column_spec(2, bold = TRUE, color = "blue") %>%
+  column_spec(3, width = "3cm")
+
+```
+\newpage
+
+```{r, echo=FALSE, message=FALSE, fig.cap="Top 5 Causes of Death by Race. This graph displays the leading causes of death, broken down by race/ethnicity", fig.width=10, fig.height=8, echo=FALSE}
+# create table showing top 5 leading causes of death by race
+top_causes_by_race <- nyc_data %>%
+  group_by(Race.Ethnicity, Leading.Cause) %>%
+  summarise(Total_Deaths = sum(as.numeric(Deaths), na.rm = TRUE)) %>%
+  arrange(Race.Ethnicity, desc(Total_Deaths)) %>%
+  mutate(rank = row_number()) %>%
+  filter(rank <= 5) %>%
+  ungroup()
+
+# create bar graph to display leading causes of death by race
+gg <- ggplot(top_causes_by_race, aes(x = Leading.Cause, y = Total_Deaths)) +
+  geom_col(aes(fill = Leading.Cause)) + 
+  facet_wrap(~Race.Ethnicity, scales = "free_y") + 
+  scale_fill_brewer(palette = "Paired") + 
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle = 40, hjust = 1), 
+        strip.text.x = element_text(size = 6), 
+        legend.position = "none") + 
+  labs(x = "Top 5 Causes of Death", y = "Total Deaths") 
+
+print(gg)
+```
+
 
 # Discussion
 
@@ -113,7 +191,7 @@ Weaknesses and next steps should also be included.
 
 # Additional data details
 
-# Model details {#sec-model-details}
+# Model details 
 
 ## Posterior predictive check
 
@@ -298,6 +376,7 @@ This suggests...
 @fig-stanareyouokay-2 is a Rhat plot.
 It shows...
 This suggests...
+
 
 \newpage
 
