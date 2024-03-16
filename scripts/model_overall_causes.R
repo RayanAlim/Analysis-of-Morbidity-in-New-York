@@ -1,3 +1,10 @@
+#### Preamble ####
+# Purpose: Regression model for causes of death for overall population  
+# Author: Maria Mangru, Rayan Awad Alim, MD Mubtasim-Faud
+# Date: 15th March, 2024
+# License: MIT
+
+
 # load libraries
 library(dplyr)
 library(readr)

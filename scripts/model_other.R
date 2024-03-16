@@ -3,6 +3,12 @@ library(dplyr)
 library(readr)
 library(ggplot2)
 library(forcats)
+#### Preamble ####
+# Purpose: Regression model for causes of death for other 
+# Author: Maria Mangru, Rayan Awad Alim, MD Mubtasim-Faud
+# Date: 15th March, 2024
+# License: MIT
+
 library(rstanarm)
 library(knitr)
 library(kableExtra)
