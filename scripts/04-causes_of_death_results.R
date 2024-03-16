@@ -1,3 +1,10 @@
+#### Preamble ####
+# Purpose: Generates graphs and tables showing the causes of death
+# Author: Maria Mangru, Rayan Awad Alim, MD Mubtasim-Faud
+# Date: 15th March, 2024
+# License: MIT
+
+
 
 # libraries
 library(dplyr)
@@ -8,7 +15,7 @@ library(testthat)
 
 # read in the dataset
 
-file_path <- "../data/analysis_data/clean_nyc_data.csv"
+file_path <- "./data/analysis_data/clean_nyc_data.csv"
 nyc_data <- read.csv(file_path)
 
 
@@ -49,6 +56,9 @@ gg <- ggplot(top_causes_by_race, aes(x = Leading.Cause, y = Total_Deaths)) +
 print(gg)
 ggsave("top_causes_by_race.png", plot = gg, width = 12, height = 8)
 
+# Save datatsets for use in models 
+write.csv(death_count_by_cause, "data/analysis_data/death_count_by_cause.csv", row.names = FALSE)
+write.csv(table_top_causes_by_race, "data/analysis_data/top_causes_by_race.csv", row.names = FALSE)
 
 
 

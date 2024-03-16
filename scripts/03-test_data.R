@@ -1,3 +1,10 @@
+#### Preamble ####
+# Purpose: Tests for simulated dataset and causes of death files 
+# Author: Maria Mangru, Rayan Awad Alim, MD Mubtasim-Faud
+# Date: 15th March, 2024
+# License: MIT
+
+
 # Load libraries 
 library(testthat)
 library(dplyr)

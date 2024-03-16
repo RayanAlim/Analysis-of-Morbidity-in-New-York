@@ -1,0 +1,31 @@
+"Race.Ethnicity","Leading.Cause","Total_Deaths"
+"Asian and Pacific Islander","Malignant Neoplasms (Cancer: C00-C97)",7927
+"Asian and Pacific Islander","Diseases of Heart (I00-I09, I11, I13, I20-I51)",7509
+"Asian and Pacific Islander","All Other Causes",4597
+"Asian and Pacific Islander","Influenza (Flu) and Pneumonia (J09-J18)",1328
+"Asian and Pacific Islander","Cerebrovascular Disease (Stroke: I60-I69)",1233
+"Black Non-Hispanic","Diseases of Heart (I00-I09, I11, I13, I20-I51)",35222
+"Black Non-Hispanic","Malignant Neoplasms (Cancer: C00-C97)",26886
+"Black Non-Hispanic","All Other Causes",21406
+"Black Non-Hispanic","Diabetes Mellitus (E10-E14)",5441
+"Black Non-Hispanic","Influenza (Flu) and Pneumonia (J09-J18)",4148
+"Hispanic","Diseases of Heart (I00-I09, I11, I13, I20-I51)",21063
+"Hispanic","Malignant Neoplasms (Cancer: C00-C97)",17562
+"Hispanic","All Other Causes",16923
+"Hispanic","Influenza (Flu) and Pneumonia (J09-J18)",3350
+"Hispanic","Diabetes Mellitus (E10-E14)",3192
+"Not Stated/Unknown","Diseases of Heart (I00-I09, I11, I13, I20-I51)",1460
+"Not Stated/Unknown","All Other Causes",855
+"Not Stated/Unknown","Malignant Neoplasms (Cancer: C00-C97)",798
+"Not Stated/Unknown","Influenza (Flu) and Pneumonia (J09-J18)",169
+"Not Stated/Unknown","Certain Conditions originating in the Perinatal Period (P00-P96)",152
+"Other Race/ Ethnicity","Diseases of Heart (I00-I09, I11, I13, I20-I51)",737
+"Other Race/ Ethnicity","Malignant Neoplasms (Cancer: C00-C97)",518
+"Other Race/ Ethnicity","All Other Causes",472
+"Other Race/ Ethnicity","Diabetes Mellitus (E10-E14)",118
+"Other Race/ Ethnicity","Influenza (Flu) and Pneumonia (J09-J18)",76
+"White Non-Hispanic","Diseases of Heart (I00-I09, I11, I13, I20-I51)",81560
+"White Non-Hispanic","Malignant Neoplasms (Cancer: C00-C97)",52676
+"White Non-Hispanic","All Other Causes",33746
+"White Non-Hispanic","Influenza (Flu) and Pneumonia (J09-J18)",9607
+"White Non-Hispanic","Chronic Lower Respiratory Diseases (J40-J47)",7085
