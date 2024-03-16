@@ -167,6 +167,126 @@ gg <- ggplot(top_causes_by_race, aes(x = Leading.Cause, y = Total_Deaths)) +
 print(gg)
 ```
 
+## Model Results 
+
+For each population we built a negative binomial and possion regression the model and then use posterior predictive checks to compare the models. We also compare between the models using the resampling method leave-one-out (LOO) cross-validation (CV). The results for the models based on each population is as follows:
+
+### White Non-Hispanic Population 
+
+Posterior Predictive Check: 
+```{r}
+#| echo: FALSE
+#| message: FALSE
+#| warning: FALSE
+#| label: fig-ppcheckpoissonvsbinomial-white
+#| layout-ncol: 2
+#| fig-cap: "Comparing posterior prediction checks for Poisson and negative binomial models in Leading cause of death of White Non-Hispanic Population in New York City"
+#| fig-subcap: ["Negative binomial model", "Poisson model"]
+
+library(magick)
+
+# Load the images
+image1 <- image_read("../data/analysis_data/Model_Output/pp_check_neg_binom_white.png")
+image2 <- image_read("../data/analysis_data/Model_Output/pp_check_poisson_white.png")
+
+image1
+image2
+```
+
+Leave-one-out (LOO) cross-validation (CV):
+
+| Model                                    | elpd_diff | se_diff |
+|------------------------------------------|-----------|---------|
+| Negative Binomial                        | -43.4     | 4.0     |
+| Poisson                                  | 0.0       | 0.0     |
+
+### Black Non Hispanic Population 
+Posterior Predictive Check: 
+```{r}
+#| echo: FALSE
+#| message: FALSE
+#| warning: FALSE
+#| label: fig-ppcheckpoissonvsbinomial-black
+#| layout-ncol: 2
+#| fig-cap: "Comparing posterior prediction checks for Poisson and negative binomial models in Leading cause of death of Black Non-Hispanic Population "
+#| fig-subcap: ["Negative binomial model", "Poisson model"]
+
+library(magick)
+
+# Load the images
+image1 <- image_read("../data/analysis_data/Model_Output/pp_check_neg_binom_black.png")
+image2 <- image_read("../data/analysis_data/Model_Output/pp_check_poisson_black.png")
+
+image1
+image2
+```
+
+Leave-one-out (LOO) cross-validation (CV):
+
+| Model                                    | elpd_diff | se_diff |
+|------------------------------------------|-----------|---------|
+| Negative Binomial                        | -37.6     | 3.0     |
+| Poisson                                  | 0.0       | 0.0     |
+
+### Hispanic Population
+
+Posterior Predictive Check: 
+```{r}
+#| echo: FALSE
+#| message: FALSE
+#| warning: FALSE
+#| label: fig-ppcheckpoissonvsbinomial-hispanic
+#| layout-ncol: 2
+#| fig-cap: "Comparing posterior prediction checks for Poisson and negative binomial models in Leading cause of death of Hispanic Population in New York City"
+#| fig-subcap: ["Negative binomial model", "Poisson model"]
+
+library(magick)
+
+# Load the images
+image1 <- image_read("../data/analysis_data/Model_Output/pp_check_neg_binom_hispanic.png")
+image2 <- image_read("../data/analysis_data/Model_Output/pp_check_poisson_hispanic.png")
+
+image1
+image2
+```
+
+Leave-one-out (LOO) cross-validation (CV):
+
+| Model                                    | elpd_diff | se_diff |
+|------------------------------------------|-----------|---------|
+| Negative Binomial                        | -34.0     | 2.8     |
+| Poisson                                  | 0.0       | 0.0     |
+
+### Asian And Pacific Islanders Population 
+
+Posterior Predictive Check: 
+```{r}
+#| echo: FALSE
+#| message: FALSE
+#| warning: FALSE
+#| label: fig-ppcheckpoissonvsbinomial-asian
+#| layout-ncol: 2
+#| fig-cap: "Comparing posterior prediction checks for Poisson and negative binomial models in Leading cause of death of Asian And Pacific Islanders Population in New York City"
+#| fig-subcap: ["Negative binomial model", "Poisson model"]
+
+library(magick)
+
+# Load the images
+image1 <- image_read("../data/analysis_data/Model_Output/pp_check_neg_binom_asian.png")
+image2 <- image_read("../data/analysis_data/Model_Output/pp_check_poisson_asian.png")
+
+image1
+image2
+```
+
+
+Leave-one-out (LOO) cross-validation (CV):
+
+| Model                                    | elpd_diff | se_diff |
+|------------------------------------------|-----------|---------|
+| Negative Binomial                        | -25.7     | 1.4     |
+| Poisson                                  | 0.0       | 0.0     |
+
 
 # Discussion
 
