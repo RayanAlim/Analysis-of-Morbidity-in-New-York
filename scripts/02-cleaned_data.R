@@ -1,3 +1,8 @@
+#### Preamble ####
+# Purpose: Clean dataset 
+# Author: Maria Mangru, Rayan Awad Alim, MD Mubtasim-Faud
+# Date: 15th March, 2024
+# License: MIT
 
 # load libraries
 library(tidyverse)
