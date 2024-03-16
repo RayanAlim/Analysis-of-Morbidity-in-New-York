@@ -60,3 +60,37 @@ model_summary <- summary(neg_binom_model)
 kable(model_summary, caption = paste("Negative Binomial Regression Summary for", race_name)) %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
 ```
+
+
+```{r}
+# Leave-One-Out Cross-Validation (LOO) for model comparison
+loo_neg_binom_notstated <- loo(neg_binom_model)
+loo_poisson_notstated <- loo(poisson_model)
+loo_comparison_notstated <- loo_compare(loo_neg_binom_notstated, loo_poisson_notstated)
+print(loo_comparison_notstated)
+```
+
+```{r}
+# Posterior Predictive Checks
+# Posterior predictive check for the Negative Binomial model
+pp_check_neg_binom_notstated <-
+  pp_check(neg_binom_model)  + ggtitle("Negative Binomial Model")
+ggsave(
+  "../data/analysis_data/Model_Output/pp_check_neg_binom_notstated.png",
+  plot = pp_check_neg_binom_notstated,
+  width = 10,
+  height = 8
+)
+pp_check_neg_binom_notstated
+
+# Posterior predictive check for the Poisson model
+pp_check_poisson_notstated <-
+  pp_check(poisson_model)  + ggtitle("Poisson Model")
+ggsave(
+  "../data/analysis_data/Model_Output/pp_check_poisson_notstated.png",
+  plot = pp_check_poisson_notstated,
+  width = 10,
+  height = 8
+)
+pp_check_poisson_notstated
+```
