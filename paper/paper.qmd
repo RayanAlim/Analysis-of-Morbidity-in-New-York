@@ -164,7 +164,7 @@ gg <- ggplot(top_causes_by_race, aes(x = Leading.Cause, y = Total_Deaths)) +
   facet_wrap(~Race.Ethnicity, scales = "free_y") + 
   scale_fill_brewer(palette = "Paired") + 
   theme_minimal() + 
-  theme(axis.text.x = element_text(angle = 40, hjust = 1), 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1), 
         strip.text.x = element_text(size = 6), 
         legend.position = "none") + 
   labs(x = "Top 5 Causes of Death", y = "Total Deaths") 
@@ -215,7 +215,7 @@ gg <- ggplot(avg_rate_top_causes_by_race, aes(x = Leading.Cause, y = Average_Age
   facet_wrap(~Race.Ethnicity, scales = "free_y") + 
   scale_fill_brewer(palette = "Paired") + 
   theme_minimal() + 
-  theme(axis.text.x = element_text(angle = 40, hjust = 1), 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1), 
         strip.text.x = element_text(size = 6), 
         legend.position = "none") + 
   labs(x = "Top 5 Causes of Death", y = "Average Age-Adjusted Death Rate") 
