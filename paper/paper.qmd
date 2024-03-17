@@ -8,7 +8,7 @@ author:
 thanks: "Code and data are available at: https://github.com/RayanAlim/Analysis-of-Morbidity-in-New-York"
 date: today
 date-format: long
-abstract: "We analysed the leading causes of death in New York City, segmented by sex and ethnicity, from 2007 to 2014. Utilizing data derived from NYC death certificates, our research offers insights into public health trends, and the importance of understanding how these causes of death vary across race."
+abstract: "Using Morbidity data for New York City, we analyzed the leading causes of death in New York City, segmented by sex and ethnicity, from 2007 to 2014. Utilizing data derived from NYC death certificates, our research offers insights into public health trends and the importance of understanding how these causes of death vary across races."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -35,11 +35,11 @@ library(kableExtra)
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections.
-We use @citeR and @rohan.
-
-The remainder of this paper is structured as follows.
-@sec-data....
+The causes of mortality and determinants of such mortality causes have puzzled researchers for centuries. Despite evidence of the cause of mortality identification inaccuracies (Johns et al., 2013), comprehensive and detailed death certificate records along with more powerful computing and statistical analysis tools have made it much easier to observe actual causes of mortality – at least in the developed world. The determinants of mortality are much harder to pinpoint, with the relative strength of each determinant an even more daunting task.
+A popular theory posits that “the wealthier the healthier” – that is, higher incomes directly cause lower mortality, and that higher incomes are the leading cause of lower mortality. Yet this supposed causal relationship can likewise work in reverse in which higher mortality means lower incomes, and studies have shown this explains much of the correlation (Cutler et al., 2006, p. 117). Surprisingly it has also been observed that recessions seem to improve health outcomes, as people are more likely to do less health-damaging activities (i.e., drinking and smoking) and more health-enhancing activities (i.e., exercise) (Ruhm, 2000). Another theory suggests that education and ethnicity are the leading causes of lower mortality. For example, according to a study, higher mortality is observed among children of black mothers relative to children of white mothers, regardless of the education level of the mother. However, when comparing only children of white mothers, mothers with higher education levels are observed to show much lower relative mortality for their children (Pamuk et al., 1998). Higher education levels among women are consistently correlated with lower mortality from cardiovascular disease and lung cancer, but also higher mortality from breast cancer (Cutler et al., 2006, p. 113) – demonstrating the importance of comparing mortality by cause. From a long-run perspective, there was hardly any observed difference in life expectancy among England's rich and poor before the Enlightenment period. Yet past this period, there is a widespread general divergence. Since education has always been more accessible for the rich post-Enlightenment, this highlights the strong potential causal link between education (i.e., the development of new ideas of personal and public health such as germ theory of disease, and openness to adjust behaviours or implement policies validating such ideas) and mortality (Cutler et al., 2006, p. 117). Finally, there is a theory that explains differences in mortality by cause due to differing socio-cultural practices by ethnicity and education levels. For example, lung cancer and cardiovascular diseases should be lower among highly educated people since they are less likely to smoke (Pamuk et al., 1998). While this theory has its merits, the size of its effect is questionable. For example, smoking prevalence is higher among white Americans relative to black Americans, yet this cannot explain black-white differences in American mortality (Cutler et al., 2006, p. 114).
+This overview of mortality causes and the debate on determinants is the motivating context behind this paper. We wish to partially close the gap in understanding between mortality causes and its determinants by analyzing recent data on leading causes of death in New York City, taking a deeper dive into mortality figures by cause and ethnic demographics. We model the leading causes of death by rank and magnitude by ethnicity, hypothesizing that each ethnicity follows a negative binomial distribution. From there, based on relative trends between each ethnicity such as trends in income, education, and health behaviours that supposedly influence mortality, we can infer to a certain extent the validity of existing mortality determinant theories based on the empirical evidence. We find that _______________________________________.
+Each section of this paper is organized as follows. Section 2 describes the data and some summary statistics. Section 3 describes our modelling, model hypothesis, and justification. Section 4 presents descriptive statistics and model results. Section 5 is a discussion of the results, including weaknesses, next steps, and conclusive remarks.
+Lastly, all analysis was conducted using R and various packages {citeR}
 
 # Data
 
@@ -47,27 +47,28 @@ This analysis utilizes data from the New York City Department of Health and Ment
 The dataset encompasses records of deaths in New York City since 2007, detailing the leading causes of death categorized by sex and ethnicity.
 Each entry in this dataset is derived from NYC death certificates which are the official documentation of every death occurring within the city's jurisdiction.
 
-## Dataset Context and Broader Implications 
+## Dataset Context and Broader Implications
 
 The investigation into the leading causes of death within New York City holds significant public health importance.
 It allows for a nuanced understanding of mortality trends, guiding health policy, and intervention strategies tailored to specific demographics and causes.
 By examining mortality across different sexes and ethnic groups, this analysis contributes to identifying health disparities and targeting efforts to address them.
 
-## Variables and Data Examination 
-The dataset comprises several key variables, including: 
-- Year: The year of the recorded death.
+## Variables and Data Examination
 
-- Leading Cause: The primary cause of death as categorized by ICD-10 codes.
+The dataset comprises several key variables, including: - Year: The year of the recorded death.
 
-- Sex: The sex of the deceased (Male, Female, or Gender Non-Conforming).
+-   Leading Cause: The primary cause of death as categorized by ICD-10 codes.
 
-- Race Ethnicity: The self-reported ethnicity of the deceased, including categories such as Hispanic, White, Non-Hispanic, Black Non-Hispanic, Asian and Pacific Islander, and others.
+-   Sex: The sex of the deceased (Male, Female, or Gender Non-Conforming).
 
-- Deaths: The total number of deaths attributed to the leading cause.
+-   Race Ethnicity: The self-reported ethnicity of the deceased, including categories such as Hispanic, White, Non-Hispanic, Black Non-Hispanic, Asian and Pacific Islander, and others.
 
-- Death Rate and Age-Adjusted Death Rate: Rates per 100,000 population, providing standardized comparisons across different population sizes and age structures.
+-   Deaths: The total number of deaths attributed to the leading cause.
 
-## Alternative Datasets and Justification 
+-   Death Rate and Age-Adjusted Death Rate: Rates per 100,000 population, providing standardized comparisons across different population sizes and age structures.
+
+## Alternative Datasets and Justification
+
 While other mortality databases exist, such as the CDC's National Center for Health Statistics, the chosen dataset offers a detailed and localized perspective specific to New York City.
 This specificity provides a more precise tool for understanding and addressing urban health dynamics, making it more relevant for city-specific policy-making and health intervention strategies.
 
@@ -77,7 +78,8 @@ Preliminary data cleaning focused on addressing missing values, ensuring consist
 New variables, such as aggregated categories for cause of death or demographic groupings, were constructed to facilitate analysis.
 For instance, causes of death were grouped into broader categories (e.g., cardiovascular diseases, cancers) to examine trends at a macro level.
 
-## Summary Statistics and Relationships 
+## Summary Statistics and Relationships
+
 Initial exploratory data analysis revealed key trends and disparities in mortality rates across different populations within New York City.
 We provide summary statistics, including mean death rates and distributions of deaths by cause ethnicity, to provide insights into the health landscape of the city.
 For example, preliminary findings indicate significant differences in heart disease mortality between ethnic groups, warranting further investigation.
@@ -92,28 +94,30 @@ This suppression safeguards against the identification of individuals in rare ca
 
 # Model
 
-In our research, we investigated the causes of mortality within New York City’s diverse racial and ethnic populations for the year 2014. We hypothesize that the total number of deaths by leading cause follows a negative binomial regression. 
+In our research, we investigated the causes of mortality within New York City’s diverse racial and ethnic populations for the year 2014.
+We hypothesize that the total number of deaths by leading cause follows a negative binomial regression.
 Formally, the model is expressed as:
 
 $y_i | n_i \sim \text{NegBin}(\mu_i, k)$
 
-In the expression above, $y_i$, signifies the count of deaths for cause i,$\mu_i$ is the expected count, and $k$ is the dispersion parameter, which captures over-dispersion. 
+In the expression above, $y_i$, signifies the count of deaths for cause i,$\mu_i$ is the expected count, and $k$ is the dispersion parameter, which captures over-dispersion.
 Our model also utilizes a log-link function, modeling the expected log-count as:
 
 $\log(\mu_i) = \beta_0 + \beta_1 \times \text{Cause}_i$
 
-Where $\beta_0$ is the intercept, and $\beta_1$ represents the vector of coefficients for the leading causes of death. 
-The leading causes are treated as categorical predictors, which results in the need to use dummy coding with one reference category. 
+Where $\beta_0$ is the intercept, and $\beta_1$ represents the vector of coefficients for the leading causes of death.
+The leading causes are treated as categorical predictors, which results in the need to use dummy coding with one reference category.
 
-For our Bayesian regression framework, we employ the stan_glm() function from the rstanarm package, which assumes default normal priors for the regression coefficients as follows:
-$\beta_0$ ~ Normal(0,2.5)
-$\beta_1$ ~ Normal(0,2.5)
-
+For our Bayesian regression framework, we employ the stan_glm() function from the rstanarm package, which assumes default normal priors for the regression coefficients as follows: $\beta_0$ \~ Normal(0,2.5) $\beta_1$ \~ Normal(0,2.5)
 
 ### Model justification
-The negative binomial regression was used due to its ability to account for the over-dispersion present in the data. This is a common occurrence with mortality counts due to the heterogeneity of death causes. Through the use of the  parameter, we can model the variance separately from the mean which provides a more flexible and accurate representation of the data. This model also accommodates the count nature of the dependent variable. 
-Furthermore, the model’s priors are informed by the normative distributions typically used in Bayesian regression analysis. This enables a degree of regularization that reduces the potential for overfitting. 
 
+The negative binomial regression was used due to its ability to account for the over-dispersion present in the data.
+This is a common occurrence with mortality counts due to the heterogeneity of death causes.
+Through the use of the parameter, we can model the variance separately from the mean which provides a more flexible and accurate representation of the data.
+This model also accommodates the count nature of the dependent variable.
+Furthermore, the model’s priors are informed by the normative distributions typically used in Bayesian regression analysis.
+This enables a degree of regularization that reduces the potential for overfitting.
 
 # Results
 
@@ -141,6 +145,7 @@ knitr::kable(death_count_by_cause, caption = "Count of Deaths by Leading Cause")
   column_spec(3, width = "3cm")
 
 ```
+
 \newpage
 
 ```{r, echo=FALSE, message=FALSE, fig.cap="Top 5 Causes of Death by Race. This graph displays the leading causes of death, broken down by race/ethnicity", fig.width=10, fig.height=8, echo=FALSE}
@@ -167,13 +172,71 @@ gg <- ggplot(top_causes_by_race, aes(x = Leading.Cause, y = Total_Deaths)) +
 print(gg)
 ```
 
-## Model Results 
+\newpage 
 
-For each population we built a negative binomial and possion regression the model and then use posterior predictive checks to compare the models. We also compare between the models using the resampling method leave-one-out (LOO) cross-validation (CV). The results for the models based on each population is as follows:
+```{r, echo=FALSE, message=FALSE}
 
-### White Non-Hispanic Population 
+avg_rate_top_causes_by_race <- nyc_data %>%
+  group_by(Race.Ethnicity, Leading.Cause) %>%
+  summarise(Average_Age_Adjusted_Death_Rate = mean(as.numeric(Age_Adjusted_Death_Rate), na.rm = TRUE)) %>%
+  arrange(Race.Ethnicity, desc(Average_Age_Adjusted_Death_Rate)) %>%
+  mutate(rank = row_number()) %>%
+  filter(rank <= 5) %>%
+  ungroup()
 
-Posterior Predictive Check: 
+# Rename the columns for display
+colnames(avg_rate_top_causes_by_race) <- c("Race/Ethnicity", "Cause of Death", "Average Age-Adjusted Death Rate", "Rank")
+
+# create table 
+knitr::kable(avg_rate_top_causes_by_race, caption = "Average Age-Adjusted Death Rates by Top 5 Leading Causes of Death by Race") %>%
+  
+  kable_styling(bootstrap_options = c("striped", "hover"),
+                full_width = F) %>%
+  column_spec(1, bold = TRUE, width = "3cm") %>%
+  column_spec(2, bold = TRUE, color = "blue", width = "3cm") %>%
+  column_spec(3, width = "3cm")
+
+```
+
+```{r, echo=FALSE, message=FALSE, fig.cap="Top 5 Causes of Death by Average Age-Adjusted Death Rate.", fig.width=10, fig.height=8, echo=FALSE}
+
+
+# Prepare the data
+avg_rate_top_causes_by_race <- nyc_data %>%
+  mutate(Age_Adjusted_Death_Rate = as.numeric(Age_Adjusted_Death_Rate)) %>%
+  group_by(Race.Ethnicity, Leading.Cause) %>%
+  summarise(Average_Age_Adjusted_Death_Rate = mean(Age_Adjusted_Death_Rate, na.rm = TRUE), .groups = 'drop') %>%
+  arrange(Race.Ethnicity, desc(Average_Age_Adjusted_Death_Rate)) %>%
+  mutate(rank = row_number()) %>%
+  filter(rank <= 5) %>%
+  select(Race.Ethnicity, Leading.Cause, Average_Age_Adjusted_Death_Rate)
+
+# Plotting
+gg <- ggplot(avg_rate_top_causes_by_race, aes(x = `Leading.Cause`, y = Average_Age_Adjusted_Death_Rate, fill = `Leading.Cause`)) +
+  geom_col() + 
+  facet_wrap(~`Race.Ethnicity`, scales = "free_y") + 
+  scale_fill_brewer(palette = "Paired") + 
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle = 40, hjust = 1), 
+        strip.text.x = element_text(size = 6), 
+        legend.position = "none") + 
+  labs(x = "Top 5 Causes of Death", y = "Average Age-Adjusted Death Rate")
+
+print(gg)
+ggsave("avg_rate_top_causes_by_race.png", plot = gg, width = 12, height = 8)
+
+```
+
+## Model Results
+
+For each population we built a negative binomial and possion regression the model and then use posterior predictive checks to compare the models.
+We also compare between the models using the resampling method leave-one-out (LOO) cross-validation (CV).
+The results for the models based on each population is as follows:
+
+### White Non-Hispanic Population
+
+Posterior Predictive Check:
+
 ```{r}
 #| echo: FALSE
 #| message: FALSE
@@ -195,13 +258,15 @@ image2
 
 Leave-one-out (LOO) cross-validation (CV):
 
-| Model                                    | elpd_diff | se_diff |
-|------------------------------------------|-----------|---------|
-| Negative Binomial                        | -43.4     | 4.0     |
-| Poisson                                  | 0.0       | 0.0     |
+| Model             | elpd_diff | se_diff |
+|-------------------|-----------|---------|
+| Negative Binomial | -43.4     | 4.0     |
+| Poisson           | 0.0       | 0.0     |
 
-### Black Non Hispanic Population 
-Posterior Predictive Check: 
+### Black Non Hispanic Population
+
+Posterior Predictive Check:
+
 ```{r}
 #| echo: FALSE
 #| message: FALSE
@@ -223,14 +288,15 @@ image2
 
 Leave-one-out (LOO) cross-validation (CV):
 
-| Model                                    | elpd_diff | se_diff |
-|------------------------------------------|-----------|---------|
-| Negative Binomial                        | -37.6     | 3.0     |
-| Poisson                                  | 0.0       | 0.0     |
+| Model             | elpd_diff | se_diff |
+|-------------------|-----------|---------|
+| Negative Binomial | -37.6     | 3.0     |
+| Poisson           | 0.0       | 0.0     |
 
 ### Hispanic Population
 
-Posterior Predictive Check: 
+Posterior Predictive Check:
+
 ```{r}
 #| echo: FALSE
 #| message: FALSE
@@ -252,14 +318,15 @@ image2
 
 Leave-one-out (LOO) cross-validation (CV):
 
-| Model                                    | elpd_diff | se_diff |
-|------------------------------------------|-----------|---------|
-| Negative Binomial                        | -34.0     | 2.8     |
-| Poisson                                  | 0.0       | 0.0     |
+| Model             | elpd_diff | se_diff |
+|-------------------|-----------|---------|
+| Negative Binomial | -34.0     | 2.8     |
+| Poisson           | 0.0       | 0.0     |
 
-### Asian And Pacific Islanders Population 
+### Asian And Pacific Islanders Population
 
-Posterior Predictive Check: 
+Posterior Predictive Check:
+
 ```{r}
 #| echo: FALSE
 #| message: FALSE
@@ -279,14 +346,12 @@ image1
 image2
 ```
 
-
 Leave-one-out (LOO) cross-validation (CV):
 
-| Model                                    | elpd_diff | se_diff |
-|------------------------------------------|-----------|---------|
-| Negative Binomial                        | -25.7     | 1.4     |
-| Poisson                                  | 0.0       | 0.0     |
-
+| Model             | elpd_diff | se_diff |
+|-------------------|-----------|---------|
+| Negative Binomial | -25.7     | 1.4     |
+| Poisson           | 0.0       | 0.0     |
 
 # Discussion
 
@@ -311,7 +376,7 @@ Weaknesses and next steps should also be included.
 
 # Additional data details
 
-# Model details 
+# Model details
 
 ## Posterior predictive check
 
@@ -450,8 +515,7 @@ This shows...
 
 -   Has the dataset been used for any tasks already? If so, please provide a description.
     -   Yes, the dataset has been used for annual health reports and studies on mortality trends within New York City.
--    Is there a repository that links to any or all papers or systems that use the dataset? If so, please provide a link or other access point.
-    -   No.
+-   Is there a repository that links to any or all papers or systems that use the dataset? If so, please provide a link or other access point. - No.
 -   What (other) tasks could the dataset be used for?
     -   The dataset could be used to predict future trends in public health.
 -   Is there anything about the composition of the dataset or the way it was collected and preprocessed/cleaned/labeled that might impact future uses? For example, is there anything that a dataset consumer might need to know to avoid uses that could result in unfair treatment of individuals or groups (for example, stereotyping, quality of service issues) or other risks or harms (for example, legal risks, financial harms)? If so, please provide a description. Is there anything a dataset consumer could do to mitigate these risks or harms?
@@ -496,7 +560,6 @@ This suggests...
 @fig-stanareyouokay-2 is a Rhat plot.
 It shows...
 This suggests...
-
 
 \newpage
 
