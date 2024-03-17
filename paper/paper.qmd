@@ -8,7 +8,7 @@ author:
 thanks: "Code and data are available at: https://github.com/RayanAlim/Analysis-of-Morbidity-in-New-York"
 date: today
 date-format: long
-abstract: "Using Morbidity data for New York City, we analyzed the leading causes of death in New York City, segmented by sex and ethnicity, from 2007 to 2014. Utilizing data derived from NYC death certificates, our research offers insights into public health trends and the importance of understanding how these causes of death vary across races. We foud that while some causes of death are consistent across ethnicities, there are significant variations which suggest ethnicity and socioeconomic factors play a crucial role in mortality. Lastly, we found that causes of death follow a negative binomial distribution acorss different ethnic groups."
+abstract: "Using Morbidity data for New York City, we analyzed the leading causes of death in New York City, segmented by sex and ethnicity, from 2007 to 2014. Utilizing data derived from NYC death certificates, our research offers insights into public health trends and the importance of understanding how these causes of death vary across races. We find that a Poisson distribution is a better fit for modelling leading causes of death by ethnicity, in both rank and magnitude. We also observe that differences in education and behaviour (i.e., smoking prevalence) among ethnicities likely significantly influence differences in age-adjusted mortality rates by cause of death between ethnicities."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -417,13 +417,6 @@ The next steps would be to improve on internal and external validity of the find
 
 # Appendix {.unnumbered}
 
-# Model details
-
-## Posterior predictive check
-
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check.
-This shows...
-
 # Datasheet
 
 ## Motivation
@@ -591,16 +584,6 @@ This shows...
     -   Contributions/suggestions can be made through the NYC Open Data portal.
 -   Any other comments?
     -   No
-
-## Diagnostics
-
-@fig-stanareyouokay-1 is a trace plot.
-It shows...
-This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot.
-It shows...
-This suggests...
 
 \newpage
 
