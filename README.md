@@ -3,7 +3,8 @@
 
 ## Overview
 
-This research project provides an analysis into the leading causes of death in New York City, segmented by sex and ethnicity, from 2007 to 2014. Utilizing data derived from NYC death certificates, our research offers insights into public health trends and the importance of understanding how these causes of death vary across races.
+Using Morbidity data for New York City, we analyzed the leading causes of death in New York City, segmented by sex and ethnicity, from 2007 to 2014. Utilizing data derived from NYC death certificates, our research offers insights into public health trends and the importance of understanding how these causes of death vary across races. We find that a Poisson distribution is a better fit for modelling leading causes of death by ethnicity, in both rank and magnitude. We also observe that differences in education and behaviour (i.e., smoking prevalence) among ethnicities likely significantly influence differences in age-adjusted mortality rates by cause of death between ethnicities.
+
 
 ## File Structure
 
