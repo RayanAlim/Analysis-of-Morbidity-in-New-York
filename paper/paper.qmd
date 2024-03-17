@@ -8,7 +8,7 @@ author:
 thanks: "Code and data are available at: https://github.com/RayanAlim/Analysis-of-Morbidity-in-New-York"
 date: today
 date-format: long
-abstract: "Using Morbidity data for New York City, we analyzed the leading causes of death in New York City, segmented by sex and ethnicity, from 2007 to 2014. Utilizing data derived from NYC death certificates, our research offers insights into public health trends and the importance of understanding how these causes of death vary across races."
+abstract: "Using Morbidity data for New York City, we analyzed the leading causes of death in New York City, segmented by sex and ethnicity, from 2007 to 2014. Utilizing data derived from NYC death certificates, our research offers insights into public health trends and the importance of understanding how these causes of death vary across races. We foud that while some causes of death are consistent across ethnicities, there are significant variations which suggest ethnicity and socioeconomic factors play a crucial role in mortality. Lastly, we found that causes of death follow a negative binomial distribution acorss different ethnic groups."
 format: pdf
 number-sections: true
 bibliography: references.bib
@@ -35,10 +35,37 @@ library(kableExtra)
 
 # Introduction
 
-The causes of mortality and determinants of such mortality causes have puzzled researchers for centuries. Despite evidence of the cause of mortality identification inaccuracies [@Johns2013], comprehensive and detailed death certificate records along with more powerful computing and statistical analysis tools have made it much easier to observe actual causes of mortality – at least in the developed world. The determinants of mortality are much harder to pinpoint, with the relative strength of each determinant an even more daunting task.
-A popular theory posits that “the wealthier the healthier” – that is, higher incomes directly cause lower mortality, and that higher incomes are the leading cause of lower mortality. Yet this supposed causal relationship can likewise work in reverse in which higher mortality means lower incomes, and studies have shown this explains much of the correlation [@Cutler2006]. Surprisingly it has also been observed that recessions seem to improve health outcomes, as people are more likely to do less health-damaging activities (i.e., drinking and smoking) and more health-enhancing activities (i.e., exercise) [@Ruhm2000]. Another theory suggests that education and ethnicity are the leading causes of lower mortality. For example, according to a study, higher mortality is observed among children of black mothers relative to children of white mothers, regardless of the education level of the mother. However, when comparing only children of white mothers, mothers with higher education levels are observed to show much lower relative mortality for their children [@Pamuk1998]. Higher education levels among women are consistently correlated with lower mortality from cardiovascular disease and lung cancer, but also higher mortality from breast cancer [@Cutler2006] – demonstrating the importance of comparing mortality by cause. From a long-run perspective, there was hardly any observed difference in life expectancy among England's rich and poor before the Enlightenment period. Yet past this period, there is a widespread general divergence. Since education has always been more accessible for the rich post-Enlightenment, this highlights the strong potential causal link between education (i.e., the development of new ideas of personal and public health such as germ theory of disease, and openness to adjust behaviours or implement policies validating such ideas) and mortality [@Cutler2006]. Finally, there is a theory that explains differences in mortality by cause due to differing sociology-cultural practices by ethnicity and education levels. For example, lung cancer and cardiovascular diseases should be lower among highly educated people since they are less likely to smoke [@Pamuk1998]. While this theory has its merits, the size of its effect is questionable. For example, smoking prevalence is higher among white Americans relative to black Americans, yet this cannot explain black-white differences in American mortality [@Cutler2006].
-This overview of mortality causes and the debate on determinants is the motivating context behind this paper. We wish to partially close the gap in understanding between mortality causes and its determinants by analyzing recent data on leading causes of death in New York City, taking a deeper dive into mortality figures by cause and ethnic demographics. We model the leading causes of death by rank and magnitude by ethnicity, hypothesizing that each ethnicity follows a negative binomial distribution. From there, based on relative trends between each ethnicity such as trends in income, education, and health behaviours that supposedly influence mortality, we can infer to a certain extent the validity of existing mortality determinant theories based on the empirical evidence. We find that _______________________________________.
-Each section of this paper is organized as follows. Section 2 describes the data and some summary statistics. Section 3 describes our modelling, model hypothesis, and justification. Section 4 presents descriptive statistics and model results. Section 5 is a discussion of the results, including weaknesses, next steps, and conclusive remarks.
+The causes of mortality and determinants of such mortality causes have puzzled researchers for centuries.
+Despite evidence of the cause of mortality identification inaccuracies [@Johns2013], comprehensive and detailed death certificate records along with more powerful computing and statistical analysis tools have made it much easier to observe actual causes of mortality – at least in the developed world.
+The determinants of mortality are much harder to pinpoint, with the relative strength of each determinant an even more daunting task.
+
+A popular theory posits that “the wealthier the healthier” – that is, higher incomes directly cause lower mortality, and that higher incomes are the leading cause of lower mortality.
+Yet this supposed causal relationship can likewise work in reverse in which higher mortality means lower incomes, and studies have shown this explains much of the correlation [@Cutler2006].
+Surprisingly it has also been observed that recessions seem to improve health outcomes, as people are more likely to do less health-damaging activities (i.e., drinking and smoking) and more health-enhancing activities (i.e., exercise) [@Ruhm2000].
+Another theory suggests that education and ethnicity are the leading causes of lower mortality.
+For example, according to a study, higher mortality is observed among children of black mothers relative to children of white mothers, regardless of the education level of the mother.
+However, when comparing only children of white mothers, mothers with higher education levels are observed to show much lower relative mortality for their children [@Pamuk1998].
+Higher education levels among women are consistently correlated with lower mortality from cardiovascular disease and lung cancer, but also higher mortality from breast cancer [@Cutler2006] – demonstrating the importance of comparing mortality by cause.
+From a long-run perspective, there was hardly any observed difference in life expectancy among England's rich and poor before the Enlightenment period.
+Yet past this period, there is a widespread general divergence.
+Since education has always been more accessible for the rich post-Enlightenment, this highlights the strong potential causal link between education (i.e., the development of new ideas of personal and public health such as germ theory of disease, and openness to adjust behaviours or implement policies validating such ideas) and mortality [@Cutler2006].
+Finally, there is a theory that explains differences in mortality by cause due to differing sociology-cultural practices by ethnicity and education levels.
+For example, lung cancer and cardiovascular diseases should be lower among highly educated people since they are less likely to smoke [@Pamuk1998].
+While this theory has its merits, the size of its effect is questionable.
+For example, smoking prevalence is higher among white Americans relative to black Americans, yet this cannot explain black-white differences in American mortality [@Cutler2006].
+
+This overview of mortality causes and the debate on determinants is the motivating context behind this paper.
+We wish to partially close the gap in understanding between mortality causes and its determinants by analyzing recent data on leading causes of death in New York City, taking a deeper dive into mortality figures by cause and ethnic demographics.
+We model the leading causes of death by rank and magnitude by ethnicity, hypothesizing that each ethnicity follows a negative binomial distribution.
+From there, based on relative trends between each ethnicity such as trends in income, education, and health behaviours that supposedly influence mortality, we can infer to a certain extent the validity of existing mortality determinant theories based on the empirical evidence.
+When we fit the leading causes of mortality by ethnicity, including relative magnitudes, we find that Poisson distributions offer a better fit compared to negative binomial distributions.
+When looking at average age-adjusted mortality rates by ethnicity, we find that both education and behavioral differences between ethnicities both significantly influence inter-ethnic differences in mortality rate by cause of death. 
+
+Each section of this paper is organized as follows.
+Section 2 describes the data and some summary statistics.
+Section 3 describes our modelling, model hypothesis, and justification.
+Section 4 presents descriptive statistics and model results.
+Section 5 is a discussion of the results, including weaknesses, next steps, and conclusive remarks.
 Lastly, all analysis was conducted using R and various packages [@citeR]
 
 # Data
@@ -121,6 +148,10 @@ This enables a degree of regularization that reduces the potential for overfitti
 
 # Results
 
+Results indicate that Poisson distributions proved to be a better fit for mortality incidence for all ethnicities relative to negative binomial distributions.
+The next sections delves into this in greater detail.
+Our descriptive analysis shows diseases of the heart to be the leading cause of death, with causes of death differing between ethnicities by mortality incidence and average age-adjusted mortality rates. 
+
 ```{r, echo=FALSE, message=FALSE}
 file_path <- "../data/analysis_data/clean_nyc_data.csv"
 nyc_data <- read.csv(file_path)
@@ -172,9 +203,7 @@ gg <- ggplot(top_causes_by_race, aes(x = Leading.Cause, y = Total_Deaths)) +
 print(gg)
 ```
 
-
-
-\newpage 
+\newpage
 
 ```{r, echo=FALSE, message=FALSE}
 
@@ -352,8 +381,35 @@ Leave-one-out (LOO) cross-validation (CV):
 
 # Discussion
 
-Contrary to expectations, we find that in modelling the rank and magnitude of the leading cause of death for each ethnicity, utilizing posterior predictive checks, the Poisson distribution offers a better fit relative to the negative binomial distribution (Figure 3; Figure 4; Figure 5; Figure 6). This disproves our hypothesis in which we expected the negative binomial distribution to be a better fit. Results are robust to model cross-validation using LOO for each ethnicity. This is interesting in that a negative binomial distribution is often considered a better fit for estimating mortality, in large part due to overdispersion concerns, yet the Poisson model proved to be a better fit here given the data. 
+Contrary to expectations, we find that in modelling the rank and magnitude of the leading cause of death for each ethnicity, utilizing posterior predictive checks, the Poisson distribution offers a better fit relative to the negative binomial distribution (Figure 3; Figure 4; Figure 5; Figure 6).
+This disproves our hypothesis in which we expected the negative binomial distribution to be a better fit.
+Results are robust to model cross-validation using LOO for each ethnicity.
+This is interesting in that a negative binomial distribution is often considered a better fit for estimating mortality, in large part due to overdispersion concerns, yet the Poisson model proved to be a better fit here given the data.
 
+Moving on to the descriptive data, Table 1 indicates that heart diseases are the leading cause of death in NYC.
+In Figure 1, we observe a similar cause of death ranking for the top five causes for both Black non-Hispanics and White non-Hispanics.
+Diabetes incidence however outranks influenza and pneumonia incidence for Black non-Hispanics, while chronic lower respiratory diseases seem to have much greater relative incidence among White non-Hispanics.
+
+Average age-adjusted death rates (per 100,000 people) are however a better metric for understanding mortality causes, given that it adjusts for both population and age.
+From Table 2 we can observe that heart diseases still rank the highest, followed by malignant neoplasms and all other causes.
+Influenza and pneumonia rank fourth followed by assault, diabetes, and cerebrovascular disease, while chronic lower respiratory diseases rank ninth.
+
+In Figure 2, we look at average age-adjusted death rates by ethnicity for leading mortality causes.
+We see that Black non-Hispanics have a significantly higher rate of heart disease relative to White non-Hispanics.
+As mentioned in the introduction, higher education levels in women are associated with lower rates of cardiovascular disease and lung cancer.
+We observe here that heart diseases, which are a major component of cardiovascular diseases and are wholly considered cardiovascular diseases, inflict much higher relative mortality rates in Black non-Hispanics – possibly because of lower average education levels relative to White non-Hispanics.
+However, chronic lower respiratory diseases, of which lung cancer is likely part, inflict higher relative mortality rates on White non-Hispanics.
+This means there must be some other factors, such as income or behavioural factors, that is influencing this mortality rate.
+We talked about how White non-Hispanics tend to smoke more than Black non-Hispanics, which may be influencing these findings.
+Meanwhile, Asians and Pacific Islanders have lower rates across the board for all causes of death relative to other ethnicities, except for cerebrovascular disease.
+
+Overall, these results are important for both how to model causes of death and helping update previous theories of mortality determinants by cause.
+Indeed, it seems that education and behavioural factors play a strong role in influencing the cause of death.
+These results are important for helping mitigate inter-racial differences in cause of death, and finding solutions to lowering rates based on improving on determinant factors for each ethnicity.
+Weaknesses include the lack of inclusion of all-cause age-adjusted mortality by ethnicity, which would be interesting to include for making further comparisons.
+We also relied heavily on descriptive data to make these inferences, which cannot be controlled for a myriad of other factors.
+For that regression analyses can help provide better accuracy.
+The next steps would be to improve on internal and external validity of the findings.
 
 \newpage
 
