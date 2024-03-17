@@ -68,6 +68,8 @@ Section 4 presents descriptive statistics and model results.
 Section 5 is a discussion of the results, including weaknesses, next steps, and conclusive remarks.
 Lastly, all analysis was conducted using R and various packages [@citeR]
 
+\newpage
+
 # Data
 
 This analysis utilizes data from the New York City Department of Health and Mental Hygiene, specifically provided by the Bureau of Vital Statistics [@NYCData].
@@ -119,6 +121,8 @@ However, it's important to acknowledge potential limitations in cause-of-death r
 To ensure privacy and reliability, rates based on small numbers (Relative Standard Error, RSE, \> 30) and aggregate counts less than 5 have been suppressed.
 This suppression safeguards against the identification of individuals in rare categories and ensures statistical reliability.
 
+\newpage
+
 # Model
 
 In our research, we investigated the causes of mortality within New York City’s diverse racial and ethnic populations for the year 2014.
@@ -145,6 +149,8 @@ Through the use of the parameter, we can model the variance separately from the 
 This model also accommodates the count nature of the dependent variable.
 Furthermore, the model’s priors are informed by the normative distributions typically used in Bayesian regression analysis.
 This enables a degree of regularization that reduces the potential for overfitting.
+
+\newpage
 
 # Results
 
@@ -378,6 +384,8 @@ Leave-one-out (LOO) cross-validation (CV):
 |-------------------|-----------|---------|
 | Negative Binomial | -25.7     | 1.4     |
 | Poisson           | 0.0       | 0.0     |
+
+\newpage
 
 # Discussion
 
