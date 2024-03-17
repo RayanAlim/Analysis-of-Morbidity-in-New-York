@@ -15,7 +15,7 @@ library(knitr)
 library(kableExtra)
 
 # load the dataset 
-file_path <- "../data/analysis_data/clean_nyc_data.csv"
+file_path <- "./data/analysis_data/clean_nyc_data.csv"
 nyc_data <- read.csv(file_path)
 
 
@@ -45,4 +45,6 @@ neg_binom_model_overall <- stan_glm(
 )
 
 # Summary model
-summary(neg_binom_model_overall) 
+summary(neg_binom_model_overall)
+
+saveRDS(neg_binom_model, file = "./models/neg_binom_model_overall_causes_2014.rds")

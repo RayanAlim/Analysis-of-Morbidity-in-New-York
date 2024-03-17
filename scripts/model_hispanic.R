@@ -14,7 +14,7 @@ library(knitr)
 library(kableExtra)
 
 # load the dataset 
-file_path <- "../data/analysis_data/clean_nyc_data.csv"
+file_path <- "./data/analysis_data/clean_nyc_data.csv"
 nyc_data <- read.csv(file_path)
 
 
@@ -53,3 +53,5 @@ model_summary <- summary(neg_binom_model)
 # Display the model summary table
 kable(model_summary, caption = paste("Negative Binomial Regression Summary for", race_name)) %>%
   kable_styling(bootstrap_options = c("striped", "hover"))
+
+saveRDS(neg_binom_model, file = "./models/neg_binom_model_hispanic_2014.rds")
