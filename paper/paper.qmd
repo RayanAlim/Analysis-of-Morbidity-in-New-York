@@ -172,6 +172,8 @@ gg <- ggplot(top_causes_by_race, aes(x = Leading.Cause, y = Total_Deaths)) +
 print(gg)
 ```
 
+
+
 \newpage 
 
 ```{r, echo=FALSE, message=FALSE}
@@ -200,30 +202,25 @@ knitr::kable(avg_rate_top_causes_by_race, caption = "Average Age-Adjusted Death 
 
 ```{r, echo=FALSE, message=FALSE, fig.cap="Top 5 Causes of Death by Average Age-Adjusted Death Rate.", fig.width=10, fig.height=8, echo=FALSE}
 
-
-# Prepare the data
 avg_rate_top_causes_by_race <- nyc_data %>%
-  mutate(Age_Adjusted_Death_Rate = as.numeric(Age_Adjusted_Death_Rate)) %>%
   group_by(Race.Ethnicity, Leading.Cause) %>%
-  summarise(Average_Age_Adjusted_Death_Rate = mean(Age_Adjusted_Death_Rate, na.rm = TRUE), .groups = 'drop') %>%
+  summarise(Average_Age_Adjusted_Death_Rate = mean(as.numeric(Age_Adjusted_Death_Rate), na.rm = TRUE)) %>%
   arrange(Race.Ethnicity, desc(Average_Age_Adjusted_Death_Rate)) %>%
   mutate(rank = row_number()) %>%
   filter(rank <= 5) %>%
-  select(Race.Ethnicity, Leading.Cause, Average_Age_Adjusted_Death_Rate)
+  ungroup()
 
-# Plotting
-gg <- ggplot(avg_rate_top_causes_by_race, aes(x = `Leading.Cause`, y = Average_Age_Adjusted_Death_Rate, fill = `Leading.Cause`)) +
-  geom_col() + 
-  facet_wrap(~`Race.Ethnicity`, scales = "free_y") + 
+gg <- ggplot(avg_rate_top_causes_by_race, aes(x = Leading.Cause, y = Average_Age_Adjusted_Death_Rate)) +
+  geom_col(aes(fill = Leading.Cause)) + 
+  facet_wrap(~Race.Ethnicity, scales = "free_y") + 
   scale_fill_brewer(palette = "Paired") + 
   theme_minimal() + 
   theme(axis.text.x = element_text(angle = 40, hjust = 1), 
         strip.text.x = element_text(size = 6), 
         legend.position = "none") + 
-  labs(x = "Top 5 Causes of Death", y = "Average Age-Adjusted Death Rate")
+  labs(x = "Top 5 Causes of Death", y = "Average Age-Adjusted Death Rate") 
 
 print(gg)
-ggsave("avg_rate_top_causes_by_race.png", plot = gg, width = 12, height = 8)
 
 ```
 
