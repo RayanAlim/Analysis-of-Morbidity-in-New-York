@@ -355,26 +355,14 @@ Leave-one-out (LOO) cross-validation (CV):
 
 # Discussion
 
-## First discussion point {#sec-first-point}
+Contrary to expectations, we find that in modelling the rank and magnitude of the leading cause of death for each ethnicity, utilizing posterior predictive checks, the Poisson distribution offers a better fit relative to the negative binomial distribution (Figure 3; Figure 4; Figure 5; Figure 6). This disproves our hypothesis in which we expected the negative binomial distribution to be a better fit. Results are robust to model cross-validation using LOO for each ethnicity. This is interesting in that a negative binomial distribution is often considered a better fit for estimating mortality, in large part due to overdispersion concerns, yet the Poisson model proved to be a better fit here given the data. 
 
-If my paper were 10 pages, then should be be at least 2.5 pages.
-The discussion is a chance to show off what you know and what you learnt from all this.
-
-## Second discussion point
-
-## Third discussion point
-
-## Weaknesses and next steps
-
-Weaknesses and next steps should also be included.
 
 \newpage
 
 \appendix
 
 # Appendix {.unnumbered}
-
-# Additional data details
 
 # Model details
 
